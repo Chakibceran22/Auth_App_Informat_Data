@@ -4,7 +4,7 @@ this is a simple project for an auth app asked by our teacher and it was implmee
 ## Running the programme 
 ```bash
 # we use this commande to generate an output fie named app.exe and linking to open ssl lib for the hashing function
-gcc main.c -o app.exe -lssl -lcrypto 
+gcc main.c auth.c utils.c validation.c -o app -lssl -lcrypto 
 ```
 
 ## Main Conditins:

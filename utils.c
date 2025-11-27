@@ -2,7 +2,22 @@
 #include <stdlib.h>
 #include <string.h>
 #include <openssl/sha.h>
+
+#ifdef _WIN32
+    #include <windows.h>
+#else
+    #include <unistd.h>
+#endif
+
 #include "utils.h"
+
+void sleep_seconds(int seconds) {
+    #ifdef _WIN32
+        Sleep(seconds * 1000);  // Windows: milliseconds
+    #else
+        sleep(seconds);         // Unix: seconds
+    #endif
+}
 
 void generateSalt(char *salt) {
     sprintf(salt, "%05d", rand() % 100000);
