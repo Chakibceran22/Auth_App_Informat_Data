@@ -11,3 +11,6 @@ gcc main.c -o app.exe -lssl -lcrypto
 - usename must be 5 lowercase characters only
 - password must be 8 characters or digits from 0-9
 - output saved as follows: **username**:**password**:**salt**,  in a file named password.txt
+
+## Disclamer 
+you are free to use this code for the homewrk but change some small details  

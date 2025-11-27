@@ -22,6 +22,25 @@ int isAllLowercase(char *str)
     }
     return 1;
 }
+int checkIfUsernameExists(const char *username) {
+    FILE *file = fopen(PASSWORD_FILE, "r");
+    if (file == NULL) {
+        return 0; // File doesn't exist, so username can't exist
+    }
+
+    char line[200];
+    while (fgets(line, sizeof(line), file)) {
+        char storedUsername[10];
+        sscanf(line, "%9[^:]", storedUsername);
+        if (strcmp(storedUsername, username) == 0) {
+            fclose(file);
+            return 1; // Username found
+        }
+    }
+
+    fclose(file);
+    return 0; // Username not found
+}
 
 int isValidUsername(char *username, size_t len)
 {
@@ -34,6 +53,10 @@ int isValidUsername(char *username, size_t len)
     if (!isAllLowercase(username))
     {
         printf(" Username must contain all lowercase.\n");
+        return 0;
+    }
+    if(checkIfUsernameExists(username)) {
+        printf(" Username already exists. Please choose another one.\n");
         return 0;
     }
     return 1;
@@ -143,8 +166,15 @@ void signUp()
     fclose(file);
     printf("Username '%s' saved to file!\n", username);
 }
+
+
+void signIn() {
+
+}
+
 int main()
 {
+    srand(time(NULL)); //for creating the raond seed
     signUp();
     return 0;
 }
